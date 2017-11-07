@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel=StyleSheet href="main.css" type="text/css">
+
+<!-------------------- J a v a S c r i p t   I n c l u d e s------------------->
+
+<!--Libs-->
+<script src="JS/kinetic/kinetic-v4.2.0.min.js"></script><!--kinetic framework-->
+<script src="JS/drag_div.js" ></script><!-- draggable divs for textboxes ------>
+<script src="JS/jscolor/jscolor.js" ></script><!-------- JS color picker ------>
+
+<!--Self defined -->
+<script src="JS/windowOps.js"></script><!-------Auto Resize Functions---------->
+<script src="JS/addObjects.js"></script><!------Add Object Functions----------->
+<script src="JS/ResizeBox.js"></script><!-------Image manipulation Functions--->
+<script src="JS/canvasOps.js"></script><!-------Canvas Operations-------------->
+<script src="JS/htmlOps.js"></script><!---------Generate slidey HTML ---------->
+<script src="JS/textarea.js"></script><!--------Textarea popup ---------------->
+<script src="JS/pageOpts.js" ></script><!-------Page options ------------------>
+<script src="JS/editable_opts.js"></script><!---Rich text editing of textarea-->
+
+<!----------------------------------------------------------------------------->
+
+<script>
+//Useful website for saving and reloading a stage:
+//http://www.html5canvastutorials.com/kineticjs/html5-canvas-events-tutorials-introduction-with-kineticjs/
+
+//Global Pointers
+var stage;				//canvas
+var w_width, w_height;	//Window params
+var margins = 4;
+
+//Layers
+var xscale = 1, yscale = 1; //current scales (usually equal)
+
+var color_obj; //global pointer to object to be colored.
+
+window.onload = function () {
+	stage = new Kinetic.Stage({
+		container: 'container',
+		width: window.innerWidth, height: window.innerHeight
+	});
+	makeWYSIWYG(document.getElementById('editable'));
+	initial();
+
+	addPage();
+
+};
+
+window.addEventListener('resize', resize, false);
+window.addEventListener('orientationchange', resize, false);
+</script>
+</head>
+
+<body>
+<!-- O V E R L A Y --->
+<div id="black_overlay"></div> <!--Used for dimming background elements for foreground ones -->
+
+<div id="text_config">
+	<div id="makeWYSIWYG_buttons_container" >
+		<div class="makeWYSIWYG_buttons">
+			<button data-tag="bold"><b>B</b></button>
+			<button data-tag="italic"><em>I</em></button>
+			<button data-tag="underline"><ins>U</ins></button>
+			<button data-tag="strikeThrough"><del>S</del></button>
+			<button data-tag="insertUnorderedList">&bull;List</button>
+			<button data-tag="insertOrderedList">1. List</button>
+			<button data-tag="createLink"><ins style="color: blue;">Link</ins>
+			</button>
+			<button data-tag="insertImage">Img</button>
+<!---			<button data-value="h1" data-tag="heading">Main title</button>
+			<button data-value="h2" data-tag="heading">Subtitle</button><br /> -->
+
+	<section id="editable" contenteditable="true">
+    <h1>Edit away!</h1>
+    <p>Here's a typical paragraph element</p>
+    <ol>
+      <li>and now a list</li>
+      <li>with only</li>
+      <li>three items</li>
+    </ol>
+	<p>which can then continue on down here...</p>
+	</section>
+	<span id="text_submitter"><!--Submit button -- textarea.js --></span>
+	<input type="button" onclick="drawTextBox(false)" value="Close">
+	<button data-tag="removeFormat">Remove format</button>
+		</div>
+	</div>
+</div>
+
+<!--Canvas--->
+<div id="container">
+	<div id="textbox_holder" ><!-Store all the floaty textbox divs  here-->
+	</div>
+	<!--HERE BE DRAGONS-->
+</div>
+
+<!--Panels-->
+<div id="panel_left">
+
+<!-- T E X T   O P T I O N S -->
+	<div id="text_container">
+		<input type='button' value='Text' onclick='drawTextBox(true)' />
+	</div>	
+<!-- I M A G E   O P T I O N S -->
+	<div id="image_container">
+		<input type='button' value='Image' onclick='addPreview()' />
+		<div id="image_config">
+			<!--TODO: other options-->
+		</div>
+	</div>
+
+<!-- O T H E R   O P T I O N S -->
+	<div id="other_container" style="z-index:14" >
+		<input type='button' value='Save' onclick='saveCanvas()' /><br />
+		<input type='button' value='Load' onclick='loadCanvas()' /><br />
+		<input type='button' value='Preview' onclick='printCanvas()' />
+		<input type='button' value='Download' onclick='downloadCanvas()' />
+		<div id="other_config">
+			<!--TODO: other options-->
+		</div>
+	</div>
+<!--- C O L O R   B O X -->
+	<div id="colorbox">
+		<h7 id="colorname_obj" >[select item]</h7><br/>
+		<input class="color {pickerFaceColor:'transparent',pickerFace:3,pickerBorder:0,pickerInsetColor:'black'}"
+				id="color_pick" style="width:50%" value="000000" >
+		<input type="button" id="color_set" style="width:40%" value="Set" onclick="setColor()" >
+	</div>
+<!--D R O P   Z O N E -->
+	<div id="drop_zone">Drop Media Here
+		<img id='preview' />
+		<!--image preview goes here -- id='peview' -->
+		<div id="progresshold"><img id="progressbar" src="images/progress.jpg" /></div>
+	</div>
+	<script src="JS/dnd_upload.js"></script><!-- Upload script -->
+</div>
+	<div id="panel_bottom">
+		<input type="button" onclick="addPage()" value="+" >
+		<div id="page_number">Page:<span id="page_numb">1</span></div>
+
+	</div>
+</body>
+</html>

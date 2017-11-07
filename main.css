@@ -1,0 +1,111 @@
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+#page_number{
+	position:absolute; top:1px; right:1px;
+	font-size: 1em;
+}
+
+#panel_left{
+	position:absolute; bottom:0px; left:0px; 
+	background-color:#6C8E74;
+	border: 3px solid #9C9898;
+	border-radius: 10px 10px 0px 10px;
+}
+
+#panel_left input {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f1bdfa), color-stop(1, #1d3623) );
+	background:-moz-linear-gradient( center top, #f1bdfa 5%, #1d3623 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f1bdfa', endColorstr='#1d3623');
+	background-color:#f1bdfa;
+	-moz-border-radius:22px;
+	-webkit-border-radius:22px;
+	border-radius:22px;
+	border:3px solid #312633;
+	width:100%;
+	color:#ffe0ff;
+	font-family:arial;
+	font-size:12px;
+	font-weight:bold;
+//	padding:6px 39px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #557350;
+}#panel_left input:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1d3623), color-stop(1, #f1bdfa) );
+	background:-moz-linear-gradient( center top, #1d3623 5%, #f1bdfa 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1d3623', endColorstr='#f1bdfa');
+	background-color:#1d3623;
+}
+
+
+#panel_bottom{
+	position:absolute; bottom:0px; right:0px;
+	background-color:#6C8E74;
+	border: 3px solid #9C9898;
+	border-radius: 0px 10px 10px 0px;
+	color:white;
+}
+
+#panel_bottom input {
+	width:30px
+	height:30px;
+}
+
+#text_config{
+	border: 3px solid #ffffff;
+	border-radius: 10px 10px 10px 10px;
+	font-size: 0.8em;
+	background-color:#6C8E74;
+	position:absolute; top:40px; left:40px; z-index:5001;
+	display:none;
+}
+
+#drop_zone{
+	border:2px dashed #bbb;
+	position:absolute; bottom:0px;
+	text-align: center; vertical-align:middle;
+	color: #BBB;
+	font-size: 1.5em;
+	font-family: Arial, sans-serif;
+}
+
+#preview{
+	position:absolute;
+	display:none;
+	top:10px;left:10px;width:95px;height:95px; z-index:0;
+}
+
+
+#container{
+	position:absolute; top:0px; left:120px;
+}
+
+#container canvas {
+	border: 3px solid #9C9898;
+	border-radius: 10px 10px 10px 10px;
+}
+
+#progresshold{
+	position:absolute; bottom:-2px; left:10px;
+}
+
+#progressbar{
+	width:0px; height:4px;
+}
+
+#colorname_obj{
+	text-align:center;
+}
+
+#black_overlay{
+	position:absolute; top:0px; left:0px; right:0px; bottom:0px; z-index:5000;
+	background-color:#000000; opacity:0.7;
+	display:none;
+}
+
+#editable{	
+	background-color:white;
+	margin: 10px;
+}
